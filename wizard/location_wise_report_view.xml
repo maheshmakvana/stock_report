@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<menuitem id="main_menu_location_wise_report"
+            name="Report"
+            parent="stock.menu_stock_root"
+            sequence="8"
+            />
+	<record model="ir.ui.view" id="location_wise_report_view">
+		<field name="name">location.wise.report.form.view.wiz</field>
+		<field name="model">location.wise.report.wiz</field>
+		<field name="arch" type="xml">
+			<form string="Location Wise">
+					<group>
+						<group>
+							<field name="caterogy_ids" widget="many2many_tags" required="1"/>
+							<field name="select_location" widget="radio"/>
+							<field name="location_id" attrs="{'invisible': [('select_location', '!=', 'location')],'required':[('select_location', '==', 'location')]}" />
+						</group>
+					</group>
+				<footer>
+					<button name="location_wise_report" string="Print Excle" type="object" class="oe_highlight"/>
+					<button string="Cancel" name="cancel" special="cancel" class="oe_highlight"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_location_wise_report_action" model="ir.actions.act_window">
+		<field name="name">Location Wise</field>
+		<field name="res_model">location.wise.report.wiz</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+    <menuitem id="menu_location_wise_report" name="Stock Report(Location wise)" action="action_location_wise_report_action" parent="main_menu_location_wise_report" />
+
+    <record model="ir.ui.view" id="location_wise_report_excel_extended_form">
+		<field name="name">location.wise.report.excel.extended.form</field>
+		<field name="model">location.wise.report.excel.extended</field>
+		<field name="arch" type="xml">
+			<form string="Excel Report">
+				<group>
+					<group>
+						<field name="excel_file" readonly="1" filename="file_name"/>
+					</group>
+					<group>
+						<field name="file_name" invisible="1"/>
+					</group>
+				</group>
+				<footer>
+					<button string="Cancel" name="cancel" special="cancel" class="oe_highlight"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_location_wise_report_excel_extended" model="ir.actions.act_window">
+		<field name="name">Excel Report</field>
+		<field name="res_model">location.wise.report.excel.extended</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+	
+</odoo>
