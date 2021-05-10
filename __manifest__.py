@@ -16,6 +16,6 @@
     "sequence": 1,
     'installable': True,
     'application': False,
-    'price': 5,
+    'price': 0,
     'currency': "EUR",
 }
